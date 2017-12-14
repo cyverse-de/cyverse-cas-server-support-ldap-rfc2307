@@ -41,7 +41,7 @@ import java.util.function.Predicate;
  * This class was copied and modified from {@link LdapAuthenticationConfiguration}, which is not designed to be
  * extended.
  */
-@Configuration("ldapAuthenticationConfiguration")
+@Configuration("rfc2307LdapAuthenticationConfiguration")
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 public class Rfc2307LdapAuthenticationConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(Rfc2307LdapAuthenticationConfiguration.class);
