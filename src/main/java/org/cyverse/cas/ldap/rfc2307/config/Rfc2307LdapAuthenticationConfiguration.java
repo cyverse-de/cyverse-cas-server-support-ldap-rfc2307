@@ -46,16 +46,28 @@ import java.util.function.Predicate;
 public class Rfc2307LdapAuthenticationConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(Rfc2307LdapAuthenticationConfiguration.class);
 
-    @Autowired
     private CasConfigurationProperties casProperties;
+
+    private PrincipalResolver personDirectoryPrincipalResolver;
+
+    private ServicesManager servicesManager;
+
+    @Autowired
+    public void setCasProperties(CasConfigurationProperties casProperties) {
+        this.casProperties = casProperties;
+    }
 
     @Autowired
     @Qualifier("personDirectoryPrincipalResolver")
-    private PrincipalResolver personDirectoryPrincipalResolver;
+    public void setPersonDirectoryPrincipalResolver(PrincipalResolver personDirectoryPrincipalResolver) {
+        this.personDirectoryPrincipalResolver = personDirectoryPrincipalResolver;
+    }
 
     @Autowired
     @Qualifier("servicesManager")
-    private ServicesManager servicesManager;
+    public void setServicesManager(ServicesManager servicesManager) {
+        this.servicesManager = servicesManager;
+    }
 
     @ConditionalOnMissingBean(name = "ldapPrincipalFactory")
     @Bean
@@ -64,6 +76,7 @@ public class Rfc2307LdapAuthenticationConfiguration {
     }
 
     @Bean
+    @SuppressWarnings("unchecked")
     public Collection<AuthenticationHandler> ldapAuthenticationHandlers() {
         final Collection<AuthenticationHandler> handlers = new HashSet<>();
 
@@ -161,6 +174,7 @@ public class Rfc2307LdapAuthenticationConfiguration {
         return new DefaultLdapPasswordPolicyHandlingStrategy();
     }
 
+    @SuppressWarnings("unchecked")
     private LdapPasswordPolicyConfiguration createLdapPasswordPolicyConfiguration(final LdapAuthenticationProperties l,
                                                                                   final Authenticator authenticator,
                                                                                   final Multimap<String, String> attributes) {
