@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.cyverse.cas.ldap.rfc2307.config.Rfc2307LdapAuthenticationConfiguration

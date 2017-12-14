@@ -4,7 +4,10 @@ import org.apereo.cas.authentication.LdapAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.authentication.support.LdapPasswordPolicyHandlingStrategy;
 import org.apereo.cas.services.ServicesManager;
+import org.ldaptive.LdapEntry;
 import org.ldaptive.auth.Authenticator;
+
+import java.util.Map;
 
 public class Rfc2307LdapAuthenticationHandler extends LdapAuthenticationHandler {
 
@@ -22,5 +25,15 @@ public class Rfc2307LdapAuthenticationHandler extends LdapAuthenticationHandler 
             String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order,
             Authenticator authenticator, LdapPasswordPolicyHandlingStrategy strategy) {
         super(name, servicesManager, principalFactory, order, authenticator, strategy);
+    }
+
+    @Override
+    protected Map<String, Object> collectAttributesForLdapEntry(LdapEntry ldapEntry, String username) {
+        Map<String, Object> attributes = super.collectAttributesForLdapEntry(ldapEntry, username);
+
+        // Add some bogus attributes for testing.
+        attributes.put("entitlement", "foo");
+
+        return attributes;
     }
 }
