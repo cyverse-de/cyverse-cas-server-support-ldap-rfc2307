@@ -1,6 +1,7 @@
-apply plugin: 'java-library'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'java-library'
+apply plugin: 'maven'
 
 repositories {
     mavenCentral()
