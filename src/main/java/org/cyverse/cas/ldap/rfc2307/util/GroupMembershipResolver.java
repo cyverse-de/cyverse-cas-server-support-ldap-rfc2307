@@ -73,7 +73,7 @@ public class GroupMembershipResolver {
         executor.setBaseDn(baseDn);
         Response<SearchResult> response = executor.search(connectionFactory, buildSearchFilter(userId));
         if (response.getResultCode() != ResultCode.SUCCESS) {
-            LOG.error("the group membership lookup failed: {}", response.getMessage());
+            LOG.warn("the group membership lookup failed: {}", response.getMessage());
             return groups;
         }
 

@@ -48,7 +48,7 @@ public class Rfc2307LdapAuthenticationHandler extends LdapAuthenticationHandler 
         try {
             attributes.put("entitlement", groupMembershipResolver.resolve(ldapEntry));
         } catch (LdapException e) {
-            LOG.error("error encountered during group membership resolution: {}", e.getMessage());
+            LOG.warn("error encountered during group membership resolution: {}", e.getMessage());
         }
 
         return attributes;
