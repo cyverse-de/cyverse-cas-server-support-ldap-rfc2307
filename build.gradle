@@ -1,4 +1,7 @@
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'java-library'
+apply plugin: 'maven'
 
 repositories {
     mavenCentral()
@@ -7,6 +10,5 @@ repositories {
 dependencies {
     implementation "org.apereo.cas:cas-server-core-authentication:$casVersion"
     implementation "org.apereo.cas:cas-server-core-configuration:$casVersion"
-    implementation "org.apereo.service.persondir:person-directory-impl:$personDirectoryVersion"
-    testImplementation 'junit:junit:4.12'
+    api "org.apereo.cas:cas-server-support-ldap:$casVersion"
 }
