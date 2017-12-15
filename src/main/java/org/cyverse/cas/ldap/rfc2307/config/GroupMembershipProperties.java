@@ -3,12 +3,12 @@ package org.cyverse.cas.ldap.rfc2307.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("cyverse.cas.ldap.rfc2307")
-public class GroupMebershipProperties {
+public class GroupMembershipProperties {
 
     /**
      * The base DN to use when searching for groups.
      */
-    private String groupBaseDn;
+    private String groupBaseDn = "*";
 
     /**
      * The name of the LDAP attribute containing the group name.
@@ -79,5 +79,12 @@ public class GroupMebershipProperties {
      */
     public void setGroupsAttribute(String groupsAttribute) {
         this.groupsAttribute = groupsAttribute;
+    }
+
+    @Override
+    public String toString() {
+        return "GroupMembershipProperties{" + "groupBaseDn='" + groupBaseDn + '\''
+               + ", groupNameAttribute='" + groupNameAttribute + '\'' + ", memberAttribute='"
+               + memberAttribute + '\'' + ", groupsAttribute='" + groupsAttribute + '\'' + '}';
     }
 }

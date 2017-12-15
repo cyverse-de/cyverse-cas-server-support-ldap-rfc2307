@@ -27,6 +27,7 @@ import org.apereo.cas.services.ServicesManager;
 import org.apereo.cas.util.CollectionUtils;
 import org.apereo.cas.util.LdapUtils;
 import org.cyverse.cas.ldap.rfc2307.authentication.Rfc2307LdapAuthenticationHandler;
+import org.cyverse.cas.ldap.rfc2307.util.GroupMembershipResolver;
 import org.ldaptive.auth.AuthenticationResponseHandler;
 import org.ldaptive.auth.Authenticator;
 import org.ldaptive.auth.ext.ActiveDirectoryAuthenticationResponseHandler;
@@ -58,11 +59,13 @@ import java.util.function.Predicate;
  * extended.
  */
 @Configuration("rfc2307LdapAuthenticationConfiguration")
-@EnableConfigurationProperties(CasConfigurationProperties.class)
+@EnableConfigurationProperties({CasConfigurationProperties.class, GroupMembershipProperties.class})
 public class Rfc2307LdapAuthenticationConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(Rfc2307LdapAuthenticationConfiguration.class);
 
     private CasConfigurationProperties casProperties;
+
+    private GroupMembershipProperties groupMembershipProperties;
 
     private PrincipalResolver personDirectoryPrincipalResolver;
 
@@ -71,6 +74,11 @@ public class Rfc2307LdapAuthenticationConfiguration {
     @Autowired
     public void setCasProperties(CasConfigurationProperties casProperties) {
         this.casProperties = casProperties;
+    }
+
+    @Autowired
+    public void setGroupMembershipProperties(GroupMembershipProperties groupMembershipProperties) {
+        this.groupMembershipProperties = groupMembershipProperties;
     }
 
     @Autowired
@@ -116,9 +124,14 @@ public class Rfc2307LdapAuthenticationConfiguration {
         LOGGER.debug("Creating LDAP password policy handling strategy for [{}]", l.getLdapUrl());
         final LdapPasswordPolicyHandlingStrategy strategy = createLdapPasswordPolicyHandlingStrategy(l);
 
+        LOGGER.debug("Creating group membership resolver for [{}]", l.getLdapUrl());
+        final GroupMembershipResolver groupMembershipResolver
+                = GroupMembershipResolver.fromConfig(l, groupMembershipProperties);
+
         LOGGER.debug("Creating LDAP authentication handler for [{}]", l.getLdapUrl());
         final LdapAuthenticationHandler handler = new Rfc2307LdapAuthenticationHandler(
-                l.getName(), servicesManager, ldapPrincipalFactory(), l.getOrder(), authenticator, strategy);
+                l.getName(), servicesManager, ldapPrincipalFactory(), l.getOrder(), authenticator,
+                strategy, groupMembershipResolver);
         handler.setCollectDnAttribute(l.isCollectDnAttribute());
 
         final List<String> additionalAttributes = l.getAdditionalAttributes();
