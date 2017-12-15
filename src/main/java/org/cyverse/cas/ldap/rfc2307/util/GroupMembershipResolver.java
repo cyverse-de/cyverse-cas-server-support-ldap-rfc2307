@@ -97,7 +97,8 @@ public class GroupMembershipResolver {
      */
     private SearchFilter buildSearchFilter(String userId) {
         final SearchFilter filter = new SearchFilter("(" + memberAttribute + "={user})");
-        LOG.error("search filter expression: {}", "(" + memberAttribute + "={user})");
+        LOG.debug("search filter expression: {}", "(" + memberAttribute + "={user})");
+        LOG.debug("user for search filter expression: {}", userId);
         filter.setParameter("user", userId);
         return filter;
     }
@@ -112,10 +113,9 @@ public class GroupMembershipResolver {
      * @return the group membership resolver.
      */
     public static GroupMembershipResolver fromConfig(LdapAuthenticationProperties l, GroupMembershipProperties p) {
-        LOG.error("Group membership properties: {}", p);
         final ConnectionFactory connectionFactory = LdapUtils.newLdaptiveConnectionFactory(l);
         return new GroupMembershipResolver(
-                connectionFactory, p.getGroupBaseDn(), p.getGroupNameAttribute(),
-                l.getPrincipalAttributeId(), p.getMemberAttribute());
+                connectionFactory, p.getGroupBaseDn(), l.getPrincipalAttributeId(),
+                p.getGroupNameAttribute(), p.getMemberAttribute());
     }
 }
