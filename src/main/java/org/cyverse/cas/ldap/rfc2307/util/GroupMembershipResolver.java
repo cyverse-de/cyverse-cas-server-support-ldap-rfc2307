@@ -18,19 +18,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author dennis
+ * This class provides a way to look up the names of groups that a user belongs to in an LDAP directory
+ * that uses the rfc2307 schema.
+ *
+ * This class works by retrieving the username from the user's LDAP entry and using that to perform
+ * a second lookup for the collection of groups that the user belongs to. For example, if the
+ * username attribute is set to {@code uid} and the member attribute is set to {@code memberUid} then
+ * this class will first extract the value of the {@code uid} attribute from the user's LDAP entry and
+ * use that value to search for groups that have a {@code memberUid} attribute with the same value.
+ *
+ * Once the list of groups is obtained, this class uses the group name attribute to extract the name
+ * of each group into a list of strings. In the default configuration the group name attribute is
+ * {@code cn}. So in the case of the default configuration, the extracts the value of the {@code cn}
+ * attribute for each group and stores it in a list of strings that is then returned to the caller.
  */
 public class GroupMembershipResolver {
     private static final Logger LOG = LoggerFactory.getLogger(GroupMembershipResolver.class);
 
+    /**
+     * The LDAP connection factory.
+     */
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * The base DN for the group search (for example, {@code ou=groups,dc=example,dc=org}).
+     */
     private final String baseDn;
 
+    /**
+     * The name of the LDAP attribute containing the username.
+     */
     private final String usernameAttribute;
 
+    /**
+     * The name of the LDAP attribute containing the group name.
+     */
     private final String groupNameAttribute;
 
+    /**
+     * The name of the LDAP attribute associating group members with a group.
+     */
     private final String memberAttribute;
 
     /**

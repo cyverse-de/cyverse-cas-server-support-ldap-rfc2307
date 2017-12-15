@@ -14,6 +14,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
+/**
+ * This class augments the {@link LdapAuthenticationHandler} class so that it can also resolve group
+ * membership information for authenticated users in LDAP directories that use the rfc2307 schema.
+ */
 public class Rfc2307LdapAuthenticationHandler extends LdapAuthenticationHandler {
     private static final Logger LOG = LoggerFactory.getLogger(Rfc2307LdapAuthenticationConfiguration.class);
 

@@ -55,8 +55,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * This class was copied and modified from {@link LdapAuthenticationConfiguration}, which is not designed to be
- * extended.
+ * This class was copied and modified from {@link LdapAuthenticationConfiguration}, which is not designed
+ * to be extended.
  */
 @Configuration("rfc2307LdapAuthenticationConfiguration")
 @EnableConfigurationProperties({CasConfigurationProperties.class, GroupMembershipProperties.class})

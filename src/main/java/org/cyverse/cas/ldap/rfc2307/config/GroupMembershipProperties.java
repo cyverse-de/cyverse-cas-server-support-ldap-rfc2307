@@ -2,6 +2,9 @@ package org.cyverse.cas.ldap.rfc2307.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * This class contains custom configuration settings for {@link Rfc2307LdapAuthenticationConfiguration}.
+ */
 @ConfigurationProperties("cyverse.cas.ldap.rfc2307")
 public class GroupMembershipProperties {
 
