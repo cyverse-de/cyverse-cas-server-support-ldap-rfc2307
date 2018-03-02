@@ -13,3 +13,6 @@ bin/
 *.iml
 *.iws
 *.ipr
+
+# Leiningen
+target
