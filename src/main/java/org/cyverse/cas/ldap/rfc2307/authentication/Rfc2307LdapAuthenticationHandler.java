@@ -1,8 +1,8 @@
 package org.cyverse.cas.ldap.rfc2307.authentication;
 
+import org.apereo.cas.authentication.AuthenticationPasswordPolicyHandlingStrategy;
 import org.apereo.cas.authentication.LdapAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
-import org.apereo.cas.authentication.support.LdapPasswordPolicyHandlingStrategy;
 import org.apereo.cas.services.ServicesManager;
 import org.cyverse.cas.ldap.rfc2307.config.Rfc2307LdapAuthenticationConfiguration;
 import org.cyverse.cas.ldap.rfc2307.util.GroupMembershipResolver;
@@ -38,7 +38,7 @@ public class Rfc2307LdapAuthenticationHandler extends LdapAuthenticationHandler 
      */
     public Rfc2307LdapAuthenticationHandler(
             String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order,
-            Authenticator authenticator, LdapPasswordPolicyHandlingStrategy strategy,
+            Authenticator authenticator, AuthenticationPasswordPolicyHandlingStrategy strategy,
             GroupMembershipResolver groupMembershipResolver) {
         super(name, servicesManager, principalFactory, order, authenticator, strategy);
         this.groupMembershipResolver = groupMembershipResolver;
