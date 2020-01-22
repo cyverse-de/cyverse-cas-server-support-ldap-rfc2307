@@ -4,7 +4,6 @@ import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 import org.apereo.cas.authentication.AuthenticationHandler;
 import org.apereo.cas.authentication.AuthenticationPasswordPolicyHandlingStrategy;
 import org.apereo.cas.authentication.CoreAuthenticationUtils;
-import org.apereo.cas.authentication.LdapAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.authentication.principal.PrincipalFactoryUtils;
 import org.apereo.cas.authentication.principal.PrincipalNameTransformerUtils;
@@ -57,7 +56,7 @@ import java.util.HashSet;
 import java.util.function.Predicate;
 
 /**
- * This is {@link LdapAuthenticationConfiguration} that attempts to create
+ * This is {@link Rfc2307LdapAuthenticationConfiguration} that attempts to create
  * relevant authentication handlers for LDAP.
  *
  * @author Misagh Moayyed
