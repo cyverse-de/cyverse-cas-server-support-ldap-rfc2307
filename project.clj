@@ -1,4 +1,4 @@
-(defproject org.cyverse/cyverse-cas-server-support-ldap-rfc2307 "6.1.4-SNAPSHOT"
+(defproject org.cyverse/cyverse-cas-server-support-ldap-rfc2307 "6.1.3.1"
   :description "Plugin for the DataONE member node service."
   :license {:name "BSD"
             :url "http://www.cyverse.org/sites/default/files/iPLANT-LICENSE.txt"}
